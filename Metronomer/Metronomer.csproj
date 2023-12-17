@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Fonts\Fonzie-Medium.ttf" />
+    <None Remove="Images\Music-Notes\Eighth.png" />
+    <None Remove="Images\Music-Notes\Quater.png" />
+    <None Remove="Images\Music-Notes\SixTeenth.png" />
+    <None Remove="Metronomer_Icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Fonts\Fonzie-Medium.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Music-Notes\Eighth.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Music-Notes\Quater.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Music-Notes\SixTeenth.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Metronomer_Icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Audio\" />
+  </ItemGroup>
+
+</Project>
