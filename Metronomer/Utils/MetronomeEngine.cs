@@ -12,11 +12,11 @@ namespace Metronomer.Utils
     public class MetronomeEngine
     {
         private Timer _timer;
-        private SoundManager _soundManager = new SoundManager();
+        public SoundManager _soundManager = new SoundManager();
         private int _bpm = 100; // default value
         private int _division = 1; // default to quarter notes
         private bool _isStressed; //Current streesed note check
-        private int _divisionIndex = 1; //Used by the change division method. Explanation in the method.
+        private int _divisionIndex = 1; //Used by the change division index method.
 
         public MetronomeEngine()
         {
@@ -27,6 +27,8 @@ namespace Metronomer.Utils
 
         public void Start()
         {
+            _divisionIndex = 1; //Makes sure the first note will always be stressed, when unpaused.
+            ChangeDivisionStress();
             _timer.Start();
         }
 
@@ -57,8 +59,8 @@ namespace Metronomer.Utils
 
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            _soundManager.PlayNote(_isStressed ? "s" : "ns");
-            if(_division != 1)
+            _soundManager.PlayNote(_isStressed ? "ns" : "s");
+            if (_division != 1)
             {
                 ChangeDivisionIndex();
                 ChangeDivisionStress();

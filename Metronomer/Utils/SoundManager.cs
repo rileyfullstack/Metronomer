@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -12,18 +13,16 @@ namespace Metronomer.Utils
     public class SoundManager
     {
         private string? _stressedNoteSource;
-        private string? _semiStressedNoteSource;
         private string? _nonStressedNoteSource;
         private SoundPlayer? _currentPlayer; // To hold the currently playing sound
 
         public SoundManager()
         {
-            _stressedNoteSource = "Audio/MetronomeNotes/MetronomeStandard_High.wav";
-            _semiStressedNoteSource = null;
-            _nonStressedNoteSource = "Audio/MetronomeNotes/MetronomeStandard_Low.wav";
+            _stressedNoteSource = "Audio/MetronomeNotes/MetronomeStandard_Low.wav";
+            _nonStressedNoteSource = "Audio/MetronomeNotes/MetronomeStandard_High.wav";
         }
 
-        public void LoadMetronomeSounds(string title)
+        public void ChangeMetronomeSound(string title)
         {
             string jsonText = File.ReadAllText("TextResources/metronome-paths.json");
             var metronomePaths = JsonSerializer.Deserialize<MetronomePathsCollection>(jsonText);
@@ -32,7 +31,6 @@ namespace Metronomer.Utils
             if (metronome != null)
             {
                 _stressedNoteSource = metronome.Paths["Stressed"];
-                _semiStressedNoteSource = metronome.Paths["Semi-Stressed"];
                 _nonStressedNoteSource = metronome.Paths["Not-Stressed"];
             }
             else
@@ -50,9 +48,6 @@ namespace Metronomer.Utils
             {
                 case "s":
                     path = _stressedNoteSource;
-                    break;
-                case "ss":
-                    path = _semiStressedNoteSource;
                     break;
                 case "ns":
                     path = _nonStressedNoteSource;

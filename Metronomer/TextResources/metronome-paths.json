@@ -3,9 +3,15 @@
     {
       "Title": "Standard Metronome",
       "Paths": {
-        "Stressed": "Audio/MetronomeNotes/MetronomeStandard_High.wav",
-        "Semi-Stressed": null,
-        "Not-Stressed": "Audio/MetronomeNotes/MetronomeStandard_Low.wav"
+        "Stressed": "Audio/MetronomeNotes/MetronomeStandard_Low.wav",
+        "Not-Stressed": "Audio/MetronomeNotes/MetronomeStandard_High.wav"
+      }
+    },
+    {
+      "Title": "Synth Metronome",
+      "Paths": {
+        "Stressed": "Audio/MetronomeNotes/Synth-E_Low.wav",
+        "Not-Stressed": "Audio/MetronomeNotes/Synth-E_High.wav"
       }
     }
   ]

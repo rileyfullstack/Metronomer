@@ -1,8 +1,11 @@
 ﻿using Metronomer.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +30,7 @@ namespace Metronomer
         public MainWindow()
         {
             InitializeComponent();
+            LoadMetronomeSoundTitles();
         }
 
         public void changeMusicNote(string note)
@@ -124,6 +128,7 @@ namespace Metronomer
 
             // Update the image source
             toggleImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+            toggleButtonColor.Fill = new SolidColorBrush(isPlaying ? Colors.Green : Colors.Red);
 
             //Update the metronome
             if (isPlaying)
@@ -134,6 +139,32 @@ namespace Metronomer
             {
                 _metronomeEngine.Stop();
             }
+        }
+        public void LoadMetronomeSoundTitles()
+        {
+            string jsonText = File.ReadAllText("TextResources/metronome-paths.json");
+
+            var metronomePathsCollection = JsonSerializer.Deserialize<MetronomePathsCollection>(jsonText);
+
+            if (metronomePathsCollection?.MetronomePaths != null)
+            {
+                foreach (var metronomePath in metronomePathsCollection.MetronomePaths)
+                {
+                    MetronomeSoundSelectionCombobox.Items.Add(metronomePath.Title);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Metronome Paths found.");
+            }
+        }
+        public void MetronomeSoundComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!(sender is ComboBox comboBox)) return;
+            var selectedItem = comboBox.SelectedItem as String;
+            if (selectedItem == null) return;
+            Trace.WriteLine("bruh");
+            _metronomeEngine._soundManager.ChangeMetronomeSound(selectedItem);
         }
     }
 }
