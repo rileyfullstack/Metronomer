@@ -1,0 +1,12 @@
+﻿{
+  "MetronomePaths": [
+    {
+      "Title": "Standard Metronome",
+      "Paths": {
+        "Stressed": "Audio/MetronomeNotes/MetronomeStandard_High.wav",
+        "Semi-Stressed": null,
+        "Not-Stressed": "Audio/MetronomeNotes/MetronomeStandard_Low.wav"
+      }
+    }
+  ]
+}

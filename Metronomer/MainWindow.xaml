@@ -43,7 +43,7 @@
                     <Image x:Name="SixTeenthNote" Height="100" Width="100" Source="Images/Music-Notes/SixTeenth.png" Margin="34,26,300,259" Visibility="Collapsed"/>
                 </Grid>
                 <Grid>
-                    <ComboBox Width="120" Height="30" Margin="10, 20, 270, 80" SelectionChanged="NoteTypeComboBox_SelectionChanged">
+                    <ComboBox SelectedIndex="0" Width="120" Height="30" Margin="10, 20, 270, 80" SelectionChanged="NoteTypeComboBox_SelectionChanged">
                         <ComboBoxItem Content="1/4th Notes"/>
                         <ComboBoxItem Content="1/8th Notes"/>
                         <ComboBoxItem Content="1/16th Notes"/>
@@ -61,6 +61,9 @@
                     <RepeatButton x:Name="ButtonMinusBpm" Width="30" Height="30" Content="-" FontSize="15" VerticalContentAlignment="Center" Margin="350,123,20,172" Interval="100" Click="ButtonMinusBpm_Click"/>
                     <RepeatButton x:Name="ButtonPlus5Bpm" Width="30" Height="30" Content="+5" FontSize="15" VerticalContentAlignment="Center" Margin="260,123,100,172" Interval="100" Click="ButtonPlus5Bpm_Click"/>
                     <RepeatButton x:Name="ButtonMinus5Bpm" Width="30" Height="30" Content="-5" FontSize="15" VerticalContentAlignment="Center" Margin="300,123,50,172" Interval="100" Click="ButtonMinus5Bpm_Click"/>
+                </Grid>
+                <Grid>
+                    <Image Name="toggleImage" Width="70" Margin="40,35,300,-50" MouseLeftButtonDown="ToggleImage_OnClick" Source="Images/Buttons/Resume.png"/>
                 </Grid>
             </Grid>
         </Border>

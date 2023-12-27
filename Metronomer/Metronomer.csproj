@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Audio\MetronomeNotes\MetronomeStandard_High.wav" />
+    <None Remove="Audio\MetronomeNotes\MetronomeStandard_Low.wav" />
     <None Remove="Fonts\Fonzie-Medium.ttf" />
+    <None Remove="Images\Buttons\Pause.png" />
+    <None Remove="Images\Buttons\Resume.png" />
     <None Remove="Images\Music-Notes\Eighth.png" />
     <None Remove="Images\Music-Notes\Quater.png" />
     <None Remove="Images\Music-Notes\SixTeenth.png" />
@@ -16,12 +20,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Audio\MetronomeNotes\MetronomeStandard_Low.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Fonts\Fonzie-Medium.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Audio\MetronomeNotes\MetronomeStandard_High.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\Buttons\Pause.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Buttons\Resume.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Music-Notes\Eighth.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -32,10 +48,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Metronomer_Icon.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Audio\" />
   </ItemGroup>
 
 </Project>
