@@ -63,7 +63,7 @@
                     <RepeatButton x:Name="ButtonMinus5Bpm" Width="30" Height="30" Content="-5" FontSize="15" VerticalContentAlignment="Center" Margin="300,123,50,172" Interval="100" Click="ButtonMinus5Bpm_Click"/>
                 </Grid>
                 <Grid Width="75" Height="75" Margin="40,35,300,-50">
-                    <Image Name="toggleImage" Width="70" Height="70" MouseLeftButtonDown="ToggleImage_OnClick" Source="Images/Buttons/Resume.png" Panel.ZIndex="1"/>
+                    <Image Name="toggleImage" Width="70" Height="70" MouseLeftButtonDown="ToggleImage_OnClick" Source="Images/Buttons/Pause.png" Panel.ZIndex="1"/>
                     <Rectangle x:Name="toggleButtonColor"  Fill="Red" Opacity="1"/>
                 </Grid>
                 <Grid>

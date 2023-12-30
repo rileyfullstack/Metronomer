@@ -22,22 +22,11 @@ namespace Metronomer.Utils
             _nonStressedNoteSource = "Audio/MetronomeNotes/MetronomeStandard_High.wav";
         }
 
-        public void ChangeMetronomeSound(string title)
+        public void ChangeMetronomeSound(string[] paths)
         {
-            string jsonText = File.ReadAllText("TextResources/metronome-paths.json");
-            var metronomePaths = JsonSerializer.Deserialize<MetronomePathsCollection>(jsonText);
 
-            var metronome = metronomePaths?.MetronomePaths.FirstOrDefault(m => m.Title == title);
-            if (metronome != null)
-            {
-                _stressedNoteSource = metronome.Paths["Stressed"];
-                _nonStressedNoteSource = metronome.Paths["Not-Stressed"];
-            }
-            else
-            {
-                // Handle the case where the title is not found
-                Console.WriteLine("Metronome title not found.");
-            }
+            _stressedNoteSource = paths[0];
+            _nonStressedNoteSource = paths[1];
         }
 
         // Implement note playing here.
@@ -79,15 +68,5 @@ namespace Metronomer.Utils
                 Console.WriteLine("No path specified for the given stress level.");
             }
         }
-    }
-
-    public class MetronomePathsCollection
-    {
-        public List<MetronomePaths> MetronomePaths { get; set; }
-    }
-    public class MetronomePaths
-    {
-        public string Title { get; set; }
-        public Dictionary<string, string?> Paths { get; set; }
     }
 }

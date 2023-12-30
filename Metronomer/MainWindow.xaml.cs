@@ -26,6 +26,7 @@ namespace Metronomer
     {
         static bool isPlaying = false;
         private MetronomeEngine _metronomeEngine = new MetronomeEngine();
+        private SoundsJsonDeserializer soundsJsonDeserializer = new SoundsJsonDeserializer();
 
         public MainWindow()
         {
@@ -124,7 +125,7 @@ namespace Metronomer
             isPlaying = !isPlaying;
 
             // Determine the new image path
-            string imagePath = isPlaying ? "Images/Buttons/Pause.png" : "Images/Buttons/Resume.png";
+            string imagePath = isPlaying ? "Images/Buttons/Resume.png" : "Images/Buttons/Pause.png";
 
             // Update the image source
             toggleImage.Source = new BitmapImage(new Uri(imagePath, UriKind.Relative));
@@ -142,20 +143,10 @@ namespace Metronomer
         }
         public void LoadMetronomeSoundTitles()
         {
-            string jsonText = File.ReadAllText("TextResources/metronome-paths.json");
-
-            var metronomePathsCollection = JsonSerializer.Deserialize<MetronomePathsCollection>(jsonText);
-
-            if (metronomePathsCollection?.MetronomePaths != null)
+            string[] metronomeTitles = soundsJsonDeserializer.ReturnSoundTitles();
+            foreach (string metronomeTitle in metronomeTitles)
             {
-                foreach (var metronomePath in metronomePathsCollection.MetronomePaths)
-                {
-                    MetronomeSoundSelectionCombobox.Items.Add(metronomePath.Title);
-                }
-            }
-            else
-            {
-                Console.WriteLine("No Metronome Paths found.");
+                MetronomeSoundSelectionCombobox.Items.Add(metronomeTitle);
             }
         }
         public void MetronomeSoundComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -163,8 +154,7 @@ namespace Metronomer
             if (!(sender is ComboBox comboBox)) return;
             var selectedItem = comboBox.SelectedItem as String;
             if (selectedItem == null) return;
-            Trace.WriteLine("bruh");
-            _metronomeEngine._soundManager.ChangeMetronomeSound(selectedItem);
+            _metronomeEngine._soundManager.ChangeMetronomeSound(soundsJsonDeserializer.ReturnPathsByTitle(selectedItem));;
         }
     }
 }
