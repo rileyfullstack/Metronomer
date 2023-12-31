@@ -75,12 +75,12 @@
                     </Grid.RowDefinitions>
 
                     <!-- Metronome Sound Selection Combobox Grid -->
-                    <Grid Name="MetronomeSoundSelectionComboboxGrid" Grid.Row="0" VerticalAlignment="Center">
+                    <Grid x:Name="MetronomeSoundSelectionComboboxGrid" Grid.Row="0" VerticalAlignment="Center">
                         <ComboBox x:Name="MetronomeSoundSelectionCombobox" Width="200" Height="30" Margin="230,200,30,130" SelectedIndex="0" SelectionChanged="MetronomeSoundComboBox_SelectionChanged"/>
                     </Grid>
 
                     <!-- Note Indicator Rectangles Grid -->
-                    <Grid Name="NoteIndicatorRectanglesGrid" VerticalAlignment="Center" Width="250" Height="Auto" Margin="210,0,0,0">
+                    <Grid x:Name="NoteIndicatorRectanglesGrid" VerticalAlignment="Center" Width="250" Height="Auto" Margin="210,0,0,0" Visibility="Collapsed">
                         <Ellipse x:Name="NoteIndicator1" Fill="Gray" Width="45" Height="45" Margin="0,262,175,48"/>
                         <Ellipse x:Name="NoteIndicator2" Fill="Gray" Width="45" Height="45" Margin="0,262,75,48"/>
                         <Ellipse x:Name="NoteIndicator3" Fill="Gray" Width="45" Height="45" Margin="0,262,-25,48"/>

@@ -45,15 +45,32 @@ namespace Metronomer
                 case "1/4th Notes":
                     QuaterNote.Visibility = Visibility.Visible;
                     UpdateNoteDivision(1);
+                    collapseNoteIndicators();
                     break;
                 case "1/8th Notes":
                     EighthNote.Visibility = Visibility.Visible;
                     UpdateNoteDivision(2);
+                    showNoteIndicators();
                     break;
                 case "1/16th Notes":
                     SixTeenthNote.Visibility = Visibility.Visible;
                     UpdateNoteDivision(4);
+                    showNoteIndicators();
                     break;
+            }
+        }
+        public void collapseNoteIndicators() //Called upon when the division is 1, as the indicators aren't needed.
+        {
+            if (NoteIndicatorRectanglesGrid != null)
+            {
+                NoteIndicatorRectanglesGrid.Visibility = Visibility.Collapsed;
+            }
+        }
+        public void showNoteIndicators() //Makes the indicators visible.
+        {
+            if (NoteIndicatorRectanglesGrid != null)
+            {
+                NoteIndicatorRectanglesGrid.Visibility = Visibility.Visible;
             }
         }
 
