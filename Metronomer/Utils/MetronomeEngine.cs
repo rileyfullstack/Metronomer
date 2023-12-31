@@ -17,6 +17,9 @@ namespace Metronomer.Utils
         private int _division = 1; // default to quarter notes
         private bool _isStressed; //Current streesed note check
         private int _divisionIndex = 1; //Used by the change division index method.
+        private bool _allowStart = false; //Adds a flag to control the start
+        public delegate void NoteIndicatorHandler(int index = 0);
+        public event NoteIndicatorHandler NoteIndicator; //Event to trigger the visual note indication in the MainWIndow.
 
         public MetronomeEngine()
         {
@@ -36,6 +39,10 @@ namespace Metronomer.Utils
         {
             _timer.Stop();
         }
+        public void AllowStart()
+        {
+            _allowStart = true;
+        }
 
         public void SetBpm(int bpm)
         {
@@ -48,8 +55,14 @@ namespace Metronomer.Utils
 
         public void SetNoteDivision(int division)
         {
-            _division = division;
-            UpdateInterval();
+            Stop(); //Makes sure to stop and then start again so there are no bugs related to the division update.
+            NoteIndicator?.Invoke();//Turns the note indicators gray in enticipation for the change, so they don't have to wait for the sound to play to turn gray.
+            _division = division; //Updates the division value.
+            UpdateInterval(); //Updates the interval to match the new division value.
+            if (_allowStart) //If the application has allowed the start, only then it will run. This is to make sure the app doesn't activate this method on startup.
+            {
+                Start();
+            }
         }
 
         private void UpdateInterval()
@@ -60,6 +73,7 @@ namespace Metronomer.Utils
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
             _soundManager.PlayNote(_isStressed ? "ns" : "s");
+            if(!(_division == 1)) NoteIndicator?.Invoke(_divisionIndex); // Raise the note indicator event with the current division index if the _division is not equal to 1.
             if (_division != 1)
             {
                 ChangeDivisionIndex();

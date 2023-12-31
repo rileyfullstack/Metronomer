@@ -32,11 +32,13 @@ namespace Metronomer
         {
             InitializeComponent();
             LoadMetronomeSoundTitles();
+            _metronomeEngine.NoteIndicator += NoteIndicator;
+            _metronomeEngine.AllowStart(); // Allow the metronome to start after initialization
         }
 
         public void changeMusicNote(string note)
         {
-            collapseAllNotes();
+            collapseAllNotes(); //Collapses all notes before turning one of them visible.
 
             switch (note)
             {
@@ -155,6 +157,27 @@ namespace Metronomer
             var selectedItem = comboBox.SelectedItem as String;
             if (selectedItem == null) return;
             _metronomeEngine._soundManager.ChangeMetronomeSound(soundsJsonDeserializer.ReturnPathsByTitle(selectedItem));;
+        }
+        private void NoteIndicator(int index = 0) //Default is 0, which turns all the indicators to gray. Saves space instead of making a new method.
+        {
+            // Dispatch the UI updates to the main thread
+            this.Dispatcher.Invoke(() =>
+            {
+                // Reset all indicators to gray
+                NoteIndicator1.Fill = new SolidColorBrush(Colors.Gray);
+                NoteIndicator2.Fill = new SolidColorBrush(Colors.Gray);
+                NoteIndicator3.Fill = new SolidColorBrush(Colors.Gray);
+                NoteIndicator4.Fill = new SolidColorBrush(Colors.Gray);
+
+                // Set the current indicator to green
+                switch (index)
+                {
+                    case 1: NoteIndicator1.Fill = new SolidColorBrush(Colors.Green); break;
+                    case 2: NoteIndicator2.Fill = new SolidColorBrush(Colors.Green); break;
+                    case 3: NoteIndicator3.Fill = new SolidColorBrush(Colors.Green); break;
+                    case 4: NoteIndicator4.Fill = new SolidColorBrush(Colors.Green); break;
+                }
+            });
         }
     }
 }
