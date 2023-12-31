@@ -1,4 +1,5 @@
 ﻿using Metronomer.Utils;
+using Metronomer.Windows;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -34,6 +35,8 @@ namespace Metronomer
             LoadMetronomeSoundTitles();
             _metronomeEngine.NoteIndicator += NoteIndicator;
             _metronomeEngine.AllowStart(); // Allow the metronome to start after initialization
+            PracticeChangingNotes practiceChangingNotes = new PracticeChangingNotes();
+            practiceChangingNotes.Show();
         }
 
         public void changeMusicNote(string note)

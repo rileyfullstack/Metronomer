@@ -59,7 +59,7 @@ namespace Metronomer.Utils
             NoteIndicator?.Invoke();//Turns the note indicators gray in enticipation for the change, so they don't have to wait for the sound to play to turn gray.
             _division = division; //Updates the division value.
             UpdateInterval(); //Updates the interval to match the new division value.
-            if (_allowStart) //If the application has allowed the start, only then it will run. This is to make sure the app doesn't activate this method on startup.
+            if (_allowStart) //This is to make sure the app doesn't activate this method on startup.
             {
                 Start();
             }
