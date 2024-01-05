@@ -87,6 +87,14 @@
                         <Ellipse x:Name="NoteIndicator4" Fill="Gray" Width="45" Height="45" Margin="0,262,-125,48"/>
                     </Grid>
                 </Grid>
+                <Grid>
+                    <ComboBox SelectedIndex="0" Width="120" Height="30" Margin="230,150,110,0" SelectionChanged="NoteTypeComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Changing Notes"/>
+                    </ComboBox>
+                    <Image Source="Images/Buttons/ArrowStart.png" SnapsToDevicePixels="True" Width="25" Height="25" Margin="355,281,80,79">
+
+                    </Image>
+                </Grid>
             </Grid>
         </Border>
     </Grid>

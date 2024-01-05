@@ -18,7 +18,6 @@
                     <TextBlock FontSize="15"  HorizontalAlignment="Left" Margin="10,163,0,0" TextWrapping="Wrap" Text="Next Subdivision:" VerticalAlignment="Top" Height="30" Width="176"/>
                 </Grid>
             </Grid>
-
         </Border>
     </Grid>
 </Window>

@@ -13,6 +13,7 @@
     <None Remove="Audio\MetronomeNotes\Synth-E_High.wav" />
     <None Remove="Audio\MetronomeNotes\Synth-E_Low.wav" />
     <None Remove="Fonts\Fonzie-Medium.ttf" />
+    <None Remove="Images\Buttons\ArrowStart.png" />
     <None Remove="Images\Buttons\Pause.png" />
     <None Remove="Images\Buttons\Resume.png" />
     <None Remove="Images\Music-Notes\Eighth.png" />
@@ -44,6 +45,9 @@
     <Content Include="TextResources\metronome-paths.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Buttons\ArrowStart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\Buttons\Pause.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

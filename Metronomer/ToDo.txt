@@ -1,0 +1,14 @@
+﻿A. PracticeChangingNotes
+1. Add a button in the main menu to start the practice.
+X 1.a. Add a combo box. The combo box will include all of the exercises that are available. 
+1.b. Add a button to start the exercise.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+B. Add labels to all of the buttons in the main menu.
