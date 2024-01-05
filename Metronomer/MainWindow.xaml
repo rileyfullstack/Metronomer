@@ -91,9 +91,9 @@
                     <ComboBox SelectedIndex="0" Width="120" Height="30" Margin="230,150,110,0" SelectionChanged="NoteTypeComboBox_SelectionChanged">
                         <ComboBoxItem Content="Changing Notes"/>
                     </ComboBox>
-                    <Image Source="Images/Buttons/ArrowStart.png" SnapsToDevicePixels="True" Width="25" Height="25" Margin="355,281,80,79">
-
-                    </Image>
+                </Grid>
+                <Grid>
+                    <Image Source="Images/Buttons/ArrowStart.png" Width="25" Height="25" Margin="325,200,30,50"/>
                 </Grid>
             </Grid>
         </Border>

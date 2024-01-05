@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Metronomer.Utils.Practices;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace Metronomer.Utils
         private bool _allowStart = false; //Adds a flag to control the start
         public delegate void NoteIndicatorHandler(int index = 0);
         public event NoteIndicatorHandler NoteIndicator; //Event to trigger the visual note indication in the MainWIndow.
+        public string? _practiceType = null; //Practice type will be here. If its null, then there is no practice going on.
+        private PracticeChangingNotesClass? practiceChangeingNotes;
 
         public MetronomeEngine()
         {
@@ -31,13 +34,30 @@ namespace Metronomer.Utils
         public void Start()
         {
             _divisionIndex = 1; //Makes sure the first note will always be stressed, when unpaused.
-            ChangeDivisionStress();
+            ChangeDivisionStress(); //Updates the stress indicator acording to the index ^
             _timer.Start();
         }
 
         public void Stop()
         {
             _timer.Stop();
+        }
+        public void NullifyPracticeClasses() 
+        //Nullifies all of the practice classes before a change of practice type.
+        //Add more as you add more practices.
+        {
+            practiceChangeingNotes = null;
+        }
+        public void ChangePractice(string? practiceType) //If the practice type is null then it reverts to being a normal metronome.
+        {
+            NullifyPracticeClasses();
+            _practiceType = practiceType;
+            switch (_practiceType)
+            {
+                case "practiceChangeingNotes":
+                    practiceChangeingNotes = new PracticeChangingNotesClass("Quarter");
+                    break;
+            }
         }
         public void AllowStart()
         {
@@ -72,13 +92,25 @@ namespace Metronomer.Utils
 
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            _soundManager.PlayNote(_isStressed ? "ns" : "s");
-            if(!(_division == 1)) NoteIndicator?.Invoke(_divisionIndex); // Raise the note indicator event with the current division index if the _division is not equal to 1.
+            PlayNormalNote();
+        }
+
+        private void PlayNormalNote()
+        {
+            if (!(_division == 1)) NoteIndicator?.Invoke(_divisionIndex); // Raise the note indicator event with the current division index if the _division is not equal to 1.
             if (_division != 1)
             {
                 ChangeDivisionIndex();
                 ChangeDivisionStress();
             }
+        }
+        private void PlayPracticeChangeNotesNote()
+        {
+
+        }
+        private void PlayNote()
+        {
+            _soundManager.PlayNote(_isStressed ? "ns" : "s");
         }
 
         //Changes the _divisionIndex based on whether the index has reached the division or not.
@@ -102,5 +134,6 @@ namespace Metronomer.Utils
             }
             else _isStressed = false;
         }
+
     }
 }
