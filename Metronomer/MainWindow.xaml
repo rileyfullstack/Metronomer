@@ -88,12 +88,12 @@
                     </Grid>
                 </Grid>
                 <Grid>
-                    <ComboBox SelectedIndex="0" Width="120" Height="30" Margin="230,150,110,0" SelectionChanged="NoteTypeComboBox_SelectionChanged">
+                    <ComboBox x:Name="PracticeComboBox" SelectedIndex="0" Width="120" Height="30" Margin="230,150,110,0" SelectionChanged="NoteTypeComboBox_SelectionChanged">
                         <ComboBoxItem Content="Changing Notes"/>
                     </ComboBox>
                 </Grid>
                 <Grid>
-                    <Image Source="Images/Buttons/ArrowStart.png" Width="25" Height="25" Margin="325,200,30,50"/>
+                    <Image Source="Images/Buttons/ArrowStart.png" Width="25" Height="25" Margin="325,200,30,50" MouseLeftButtonDown="PracticeImage_MouseLeftButtonDown"/>
                 </Grid>
             </Grid>
         </Border>

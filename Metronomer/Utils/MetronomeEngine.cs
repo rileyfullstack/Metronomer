@@ -55,7 +55,7 @@ namespace Metronomer.Utils
             switch (_practiceType)
             {
                 case "practiceChangeingNotes":
-                    practiceChangeingNotes = new PracticeChangingNotesClass("Quarter");
+                    practiceChangeingNotes = new PracticeChangingNotesClass();
                     break;
             }
         }
@@ -75,6 +75,7 @@ namespace Metronomer.Utils
 
         public void SetNoteDivision(int division)
         {
+            if(_practiceType != null) return;
             Stop(); //Makes sure to stop and then start again so there are no bugs related to the division update.
             NoteIndicator?.Invoke();//Turns the note indicators gray in enticipation for the change, so they don't have to wait for the sound to play to turn gray.
             _division = division; //Updates the division value.
@@ -84,7 +85,17 @@ namespace Metronomer.Utils
                 Start();
             }
         }
-
+        private void PrivateSetNoteDivision(int division)
+        {
+            Stop(); //Makes sure to stop and then start again so there are no bugs related to the division update.
+            NoteIndicator?.Invoke();//Turns the note indicators gray in enticipation for the change, so they don't have to wait for the sound to play to turn gray.
+            _division = division; //Updates the division value.
+            UpdateInterval(); //Updates the interval to match the new division value.
+            if (_allowStart) //This is to make sure the app doesn't activate this method on startup.
+            {
+                Start();
+            }
+        }
         private void UpdateInterval()
         {
             _timer.Interval = (60.0 / _bpm) * 1000 / _division;
@@ -92,11 +103,24 @@ namespace Metronomer.Utils
 
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            PlayNormalNote();
+            switch (_practiceType)
+            {
+                case null:
+                    {
+                        PlayNormalNote();
+                    }
+                    break;
+                case "practiceChangeingNotes":
+                    {
+                        PlayPracticeChangeNotesNote();
+                    }
+                    break;
+            }
         }
 
         private void PlayNormalNote()
         {
+            PlayNote();
             if (!(_division == 1)) NoteIndicator?.Invoke(_divisionIndex); // Raise the note indicator event with the current division index if the _division is not equal to 1.
             if (_division != 1)
             {
@@ -106,7 +130,14 @@ namespace Metronomer.Utils
         }
         private void PlayPracticeChangeNotesNote()
         {
-
+            PlayNote();
+            if (_division == _divisionIndex) //If the division has reached its final note
+            {
+                PrivateSetNoteDivision(practiceChangeingNotes._nextSubdivision); //Change the note division according to the next subdivision in the practice
+                practiceChangeingNotes.SetNextSubdivision(); //Sets a random next subdivision
+            }
+            ChangeDivisionIndex();
+            ChangeDivisionStress();
         }
         private void PlayNote()
         {

@@ -28,6 +28,7 @@ namespace Metronomer
         static bool isPlaying = false;
         private MetronomeEngine _metronomeEngine = new MetronomeEngine();
         private SoundsJsonDeserializer soundsJsonDeserializer = new SoundsJsonDeserializer();
+        private PracticeChangingNotes practiceChangingNotes;
 
         public MainWindow()
         {
@@ -35,8 +36,6 @@ namespace Metronomer
             LoadMetronomeSoundTitles();
             _metronomeEngine.NoteIndicator += NoteIndicator;
             _metronomeEngine.AllowStart(); // Allow the metronome to start after initialization
-            PracticeChangingNotes practiceChangingNotes = new PracticeChangingNotes();
-            practiceChangingNotes.Show();
         }
 
         public void changeMusicNote(string note)
@@ -198,6 +197,14 @@ namespace Metronomer
                     case 4: NoteIndicator4.Fill = new SolidColorBrush(Colors.Green); break;
                 }
             });
+        }
+        private void PracticeImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _metronomeEngine.Stop();
+            _metronomeEngine.ChangePractice("practiceChangeingNotes");
+            practiceChangingNotes = new PracticeChangingNotes();
+            practiceChangingNotes.Show();
+            _metronomeEngine.Start();
         }
     }
 }
